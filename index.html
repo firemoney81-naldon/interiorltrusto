@@ -1,23 +1,695 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
-</html>
+
+
+    <style>
+        /* 기본 스타일 재설정 */
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.8; /* 가독성을 위해 라인 높이 증가 */
+            color: #333;
+            background: #f4f6f8; /* 배경색 변경: 부드러운 회색조 */
+        }
+        header, section, footer {
+            max-width: 1200px;
+            margin: auto;
+            background: #fff;
+            padding: 40px 30px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* 부드러운 그림자 */
+        }
+        header {
+            background: linear-gradient(to right, #e0f2f1, #b2dfdb); /* 헤더 배경색 그라데이션 */
+            text-align: center;
+            padding: 60px 30px;
+            border-radius: 12px;
+        }
+        header h1 {
+            color: #004d40; /* 깊은 녹색 톤 */
+            margin-top: 0;
+            font-size: 2.5rem;
+            line-height: 1.4;
+        }
+        header p {
+            font-size: 1.2rem;
+            color: #333;
+            font-weight: 500;
+        }
+
+        /* 네비게이션 스타일 */
+        nav {
+            background: #004d40;
+            border-radius: 8px;
+            text-align: center;
+            padding: 18px 0;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        nav a {
+            color: #fff;
+            margin: 0 20px;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s, background-color 0.3s;
+            padding: 10px 15px;
+            border-radius: 4px;
+        }
+        nav a:hover {
+            background-color: #00796b;
+            text-decoration: none;
+        }
+
+        /* 콘텐츠 섹션 제목 */
+        h2 {
+            font-size: 2rem;
+            color: #004d40;
+            border-left: 5px solid #004d40;
+            padding-left: 15px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        h3 {
+            font-size: 1.6rem;
+            color: #00796b;
+            margin-top: 30px;
+            border-bottom: 1px dashed #cfd8dc;
+            padding-bottom: 5px;
+        }
+
+        /* 카드 스타일 (서비스/사례) */
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .info-card {
+            border: 1px solid #e0e0e0;
+            padding: 25px;
+            border-radius: 10px;
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+        .info-card h4 {
+            font-size: 1.3rem;
+            color: #004d40;
+            margin-top: 0;
+        }
+        .info-card p {
+            color: #555;
+        }
+
+        /* CTA 버튼 스타일 */
+        .cta-button {
+            display: inline-block;
+            background-color: #ff9800; /* 주황색 강조 */
+            color: white;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .cta-button:hover {
+            background-color: #e65100;
+        }
+
+        /* 폼 스타일 */
+        form label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #004d40;
+        }
+        form input, form select, form textarea {
+            width: 100%;
+            padding: 12px;
+            margin-top: 4px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+        form textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        form button {
+            margin-top: 20px;
+            width: 100%;
+            cursor: pointer;
+            border: none;
+        }
+
+        /* 테이블 스타일 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 0.95rem;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #e0f2f1;
+            font-weight: 600;
+            color: #004d40;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        /* FAQ 스타일 */
+        dl.faq dt {
+            font-weight: 700;
+            margin-top: 25px;
+            cursor: pointer;
+            color: #004d40;
+            font-size: 1.1rem;
+            position: relative;
+            padding-left: 20px;
+        }
+        dl.faq dt::before {
+            content: "Q.";
+            color: #ff9800;
+            position: absolute;
+            left: 0;
+        }
+        dl.faq dd {
+            margin-left: 25px;
+            margin-top: 10px;
+            color: #555;
+            padding: 10px;
+            border-left: 3px solid #b2dfdb;
+        }
+
+        /* 강조 텍스트 */
+        strong {
+            color: #00796b;
+        }
+        .highlight {
+            background-color: #ffecb3;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+        .warning-text {
+            color: #d32f2f;
+            font-weight: bold;
+        }
+
+        /* 외부 링크 스타일 */
+        .external-link {
+            display: block;
+            margin-top: 10px;
+            color: #1a73e8;
+            text-decoration: none;
+            font-style: italic;
+        }
+        .external-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+
+    <!-- JSON-LD Structured Data for FAQ and LocalBusiness -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "2026년 기준 아파트 인테리어 평균 비용은 얼마인가요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "2026년 아파트 인테리어 비용은 평수와 범위에 따라 크게 달라집니다. 부분 인테리어의 경우 500~1,500만원, 전체 올 수리(샤시 제외)의 경우 20평대 2,000만원, 30평대 2,500~3,500만원, 40평대 3,500만원 이상이 일반적인 예상 금액입니다. 자재 등급과 업체 규모에 따라 차이가 발생합니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "인테리어 비용을 줄일 수 있는 방법은 무엇인가요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "비용 절감을 위해서는 1) 불필요한 공사 항목 제거, 2) 자재 등급 하향 조정 (예: 강마루 대신 장판), 3) 주방 가구 교체 대신 필름 시공 등 부분 리폼 활용, 4) 여러 업체의 견적 비교(최소 3곳) 등이 효과적입니다. 셀프 인테리어는 비용을 획기적으로 낮출 수 있지만, 전문가의 도움이 필요한 경우가 많습니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "인테리어 업체 선정 시 주의해야 할 점은 무엇인가요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "업체 선정 시에는 사업자등록증, 건설업 면허 보유 여부(1500만원 이상 공사 시), 계약서 상 하자보수 기간 명시 여부, 이전에 시공했던 포트폴리오 확인 등이 필수입니다. 견적서에 세부 항목이 명확하게 기재되어 있는지 확인하고, 과도하게 저렴한 견적은 피하는 것이 좋습니다."
+          }
+        }
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "전국 아파트 인테리어 비용 분석 센터",
+      "image": "https://www.yourdomain.kr/images/logo_interior.png",
+      "telephone": "1661-XXXX",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "전국 주요 도시에 협력사 보유",
+        "addressLocality": "대한민국",
+        "addressCountry": "KR"
+      },
+      "url": "https://www.yourdomain.kr/",
+      "openingHours": "Mo-Sa 09:00-18:00",
+      "areaServed": ["서울", "경기", "인천", "부산", "대구", "대전", "광주", "울산", "세종", "강원", "충북", "충남", "전북", "전남", "경북", "경남", "제주"]
+    }
+    </script>
+</head>
+<body>
+
+<header id="top">
+    <h1>2026 아파트 인테리어 비용 가이드</h1>
+    <p>평수별, 지역별, 공사 범위별 최신 인테리어 견적 비교</p>
+    <a href="#무료견적신청" class="cta-button">무료 견적 요청하기</a>
+</header>
+
+<nav>
+    <a href="#cost-analysis">비용 분석 (평수별)</a>
+    <a href="#services">공사 범위 및 항목</a>
+    <a href="#process">인테리어 절차</a>
+    <a href="#reviews">실제 고객 후기</a>
+    <a href="#free-estimate">무료 견적 신청</a>
+    <a href="#faq">자주 묻는 질문</a>
+</nav>
+
+<section id="cost-analysis" aria-label="평수별 아파트 인테리어 비용 분석">
+    <h2>평수별 아파트 인테리어 평균 비용 분석 (2026년 기준)</h2>
+    <p>아파트 인테리어 비용은 <span class="highlight">평수, 자재 등급, 공사 범위, 지역별 인건비</span> 등 다양한 요소에 따라 크게 달라집니다. 2026년 물가 상승률과 인건비 변동을 고려한 최신 예상 금액을 평수별로 정리했습니다. 아래 표는 샤시(샷시) 교체를 제외한 올 수리(전체 인테리어)의 평균 비용을 나타냅니다. 샤시 교체 시에는 추가 비용이 발생합니다.</p>
+
+    <h3>1. 20평대 아파트 인테리어 비용 (예상 금액)</h3>
+    <p>20평대 아파트(20평, 24평, 25평) 인테리어는 신혼부부 또는 1~2인 가구에게 가장 인기가 높습니다. 좁은 공간을 효율적으로 활용하는 것이 핵심이며, 확장 공사 여부에 따라 비용 편차가 큽니다. 최소 1,800만원부터 시작하여 고급 자재 사용 시 3,000만원 이상까지도 소요될 수 있습니다.</p>
+    <table>
+        <thead>
+            <tr>
+                <th>공사 항목</th>
+                <th>예상 비용 (20~25평)</th>
+                <th>특징 및 참고 사항</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>철거/폐기물 처리</td>
+                <td>150~250만원</td>
+                <td>부분 철거 시 비용 절감 가능</td>
+            </tr>
+            <tr>
+                <td>도배 (벽지)</td>
+                <td>100~150만원</td>
+                <td>실크벽지보다 합지벽지가 저렴함</td>
+            </tr>
+            <tr>
+                <td>바닥 (마루/장판)</td>
+                <td>150~250만원</td>
+                <td>강마루 (평당 8~12만원), 장판 (평당 4~6만원)</td>
+            </tr>
+            <tr>
+                <td>주방 가구 (싱크대)</td>
+                <td>300~500만원</td>
+                <td>브랜드 가구 또는 맞춤 제작에 따라 가격 편차 큼</td>
+            </tr>
+            <tr>
+                <td>욕실 (2개 기준)</td>
+                <td>400~600만원</td>
+                <td>도기, 타일 등 자재 등급에 따라 비용 차이 발생</td>
+            </tr>
+            <tr>
+                <td>조명/전기 배선</td>
+                <td>100~150만원</td>
+                <td>LED 교체 및 스위치, 콘센트 이동 포함</td>
+            </tr>
+            <tr>
+                <td>문/문틀 교체</td>
+                <td>150~200만원</td>
+                <td>문 교체 대신 필름 시공 시 비용 절감</td>
+            </tr>
+            <tr>
+                <td>샤시 (선택 사항)</td>
+                <td>600~1000만원</td>
+                <td>단열 효과 증대. 비용 절감 시 교체 생략 가능</td>
+            </tr>
+            <tr>
+                <td><strong>총 예상 금액 (샤시 제외)</strong></td>
+                <td><strong>1,800만원 ~ 2,500만원</strong></td>
+                <td><strong>자재 등급 및 시공 범위에 따라 유동적</strong></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>2. 30평대 아파트 인테리어 비용 (예상 금액)</h3>
+    <p>30평대(30평, 32평, 34평) 아파트는 가장 보편적인 평형대로, 인테리어 수요가 가장 많습니다. 거실과 주방의 개방감을 높이는 구조 변경이 자주 이루어지며, 가족 구성원의 라이프스타일을 반영한 맞춤 설계가 중요합니다. 평균적으로 2,500만원에서 4,000만원 사이의 견적이 발생합니다. 고가 자재 및 고급 디자인 적용 시 5,000만원을 초과할 수도 있습니다.</p>
+    <table>
+        <thead>
+            <tr>
+                <th>공사 항목</th>
+                <th>예상 비용 (30~34평)</th>
+                <th>특징 및 참고 사항</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>철거/폐기물 처리</td>
+                <td>200~300만원</td>
+                <td>범위가 넓어 20평대보다 비용 증가</td>
+            </tr>
+            <tr>
+                <td>도배 (벽지)</td>
+                <td>120~180만원</td>
+                <td>실크벽지 기준, 천장 포함</td>
+            </tr>
+            <tr>
+                <td>바닥 (마루/장판)</td>
+                <td>200~350만원</td>
+                <td>강마루 시공 시 평당 비용 절감 효과</td>
+            </tr>
+            <tr>
+                <td>주방 가구 (싱크대)</td>
+                <td>400~600만원</td>
+                <td>수납공간 확장 및 'ㄱ'자, 'ㄷ'자 구조 변경 포함</td>
+            </tr>
+            <tr>
+                <td>욕실 (2개 기준)</td>
+                <td>500~700만원</td>
+                <td>파티션/욕조 설치, 젠다이 시공 등 옵션 선택</td>
+            </tr>
+            <tr>
+                <td>조명/전기 배선</td>
+                <td>120~180만원</td>
+                <td>매입등, 간접조명 등 디자인 조명 추가 시 비용 증가</td>
+            </tr>
+            <tr>
+                <td>문/문틀 교체</td>
+                <td>180~250만원</td>
+                <td>전체 교체 또는 필름 리폼</td>
+            </tr>
+            <tr>
+                <td>샤시 (선택 사항)</td>
+                <td>800~1200만원</td>
+                <td>브랜드(LG하우시스, KCC 등)와 등급 선택이 중요</td>
+            </tr>
+            <tr>
+                <td><strong>총 예상 금액 (샤시 제외)</strong></td>
+                <td><strong>2,500만원 ~ 3,500만원</strong></td>
+                <td><strong>중간 등급 자재 기준</strong></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>3. 40평대 이상 아파트 인테리어 비용 (예상 금액)</h3>
+    <p>40평대(40평, 45평, 48평) 이상 대형 평형은 고급 인테리어에 대한 수요가 높습니다. 넓은 공간만큼 자재 소요량과 공사 기간이 증가하며, 디자인 컨셉에 따른 맞춤 제작 가구, 시스템 에어컨, 고급 마감재(원목 마루, 포세린 타일) 등이 적용될 가능성이 높습니다. 비용은 3,500만원부터 시작하여 5,000만원 이상까지도 책정됩니다.</p>
+    <table>
+        <thead>
+            <tr>
+                <th>공사 항목</th>
+                <th>예상 비용 (40~48평)</th>
+                <th>특징 및 참고 사항</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>철거/폐기물 처리</td>
+                <td>250~400만원</td>
+                <td>대형 평형 특성상 인력 및 기간 증가</td>
+            </tr>
+            <tr>
+                <td>도배 (벽지)</td>
+                <td>150~220만원</td>
+                <td>고급 수입 벽지 또는 친환경 페인트 시공 시 비용 급증</td>
+            </tr>
+            <tr>
+                <td>바닥 (마루/장판)</td>
+                <td>250~450만원</td>
+                <td>헤링본 마루 시공 시 일반 마루 대비 비용 증가</td>
+            </tr>
+            <tr>
+                <td>주방 가구 (싱크대)</td>
+                <td>500~800만원</td>
+                <td>대형 아일랜드, 빌트인 가전 포함 시 비용 증가</td>
+            </tr>
+            <tr>
+                <td>욕실 (2~3개 기준)</td>
+                <td>700~1000만원</td>
+                <td>고급 자재 및 사양 (호텔식 욕실) 적용 여부</td>
+            </tr>
+            <tr>
+                <td>조명/전기 배선</td>
+                <td>150~250만원</td>
+                <td>스마트 홈 시스템, 디자인 샹들리에 등 설치</td>
+            </tr>
+            <tr>
+                <td>문/문틀 교체</td>
+                <td>200~300만원</td>
+                <td>히든 도어, 슬라이딩 도어 등 디자인 요소 추가</td>
+            </tr>
+            <tr>
+                <td>샤시 (선택 사항)</td>
+                <td>1000~1500만원</td>
+                <td>이중창, 단열성능 최상급 자재 선택</td>
+            </tr>
+            <tr>
+                <td><strong>총 예상 금액 (샤시 제외)</strong></td>
+                <td><strong>3,500만원 ~ 5,000만원+</strong></td>
+                <td><strong>고가 자재 선택 시 비용 상한선 없음</strong></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p style="text-align: right; margin-top: 30px;"><a href="#free-estimate" class="cta-button" style="padding: 10px 20px;">우리집 맞춤 견적 확인하기</a></p>
+</section>
+
+<section id="services" aria-label="인테리어 공사 범위 및 항목 상세 가이드">
+    <h2>아파트 인테리어 공사 범위 및 항목 상세 가이드</h2>
+    <p>아파트 인테리어는 '전체 올 수리'와 '부분 인테리어'로 구분됩니다. 각 공사의 장단점과 범위, 그리고 비용 절감 요령에 대해 알아보겠습니다. 정확한 <span class="highlight">인테리어 견적 비교</span>를 위해서는 각 항목에 대한 이해가 필수적입니다.</p>
+
+    <h3>1. 전체 올 수리 vs. 부분 인테리어 장단점 및 차이점</h3>
+    <div class="card-container">
+        <div class="info-card">
+            <h4>전체 올 수리 (Total Remodeling)</h4>
+            <p><strong>장점:</strong> 아파트 전체의 디자인 통일성과 기능성을 극대화할 수 있습니다. 노후된 아파트의 경우 단열, 방음, 누수 등 근본적인 문제를 해결할 수 있습니다. 입주 후 하자 발생 확률이 낮고, 전체적인 만족도가 높습니다.</p>
+            <p><strong>단점:</strong> <strong class="warning-text">비용이 가장 많이 발생하며, 공사 기간이 길어집니다.</strong> 이사 후 공사를 진행해야 하는 경우, 추가적인 거주 비용(월세, 숙박비)이 발생할 수 있습니다.</p>
+        </div>
+        <div class="info-card">
+            <h4>부분 인테리어 (Partial Remodeling)</h4>
+            <p><strong>장점:</strong> 필요한 부분만 수리하여 <span class="highlight">비용을 절약</span>할 수 있습니다. 공사 기간이 짧아 이사 직후에도 비교적 빠르게 진행 가능하며, 거주하면서도 공사를 진행할 수 있는 항목이 있습니다. 예를 들어, 도배, 장판, 조명 교체 등은 가벼운 부분 수리에 해당됩니다.</p>
+            <p><strong>단점:</strong> 전체적인 디자인 통일성이 떨어질 수 있습니다. 특히 구축 아파트의 경우 부분 공사만으로는 노후된 설비(배관 등)의 근본적인 문제 해결이 어렵습니다.</p>
+        </div>
+    </div>
+
+    <h3>2. 인테리어 자재 선택 기준 및 비용 차이점</h3>
+    <p>자재의 선택은 총 인테리어 비용의 40% 이상을 차지합니다. 특히 바닥재, 주방 가구, 욕실 타일의 선택은 전체적인 <span class="highlight">아파트 인테리어 가격</span>을 결정하는 중요한 요소입니다. 고급 자재를 사용할수록 비용은 높아지지만, 내구성과 디자인 만족도는 향상됩니다.</p>
+
+    <ul>
+        <li><strong>바닥재:</strong> 장판(가장 저렴) &lt; 강마루 &lt; 포세린 타일 &lt; 원목 마루(가장 고가). 2026년 트렌드는 포세린 타일이나 무광 강마루가 인기입니다.</li>
+        <li><strong>벽지:</strong> 합지벽지(저렴, 친환경) &lt; 실크벽지(내구성 우수, 오염 관리 용이). 실크벽지는 합지벽지 대비 약 1.5~2배의 비용이 발생합니다.</li>
+        <li><strong>주방가구:</strong> 가성비 제품(한샘, 리바트) &lt; 맞춤 제작 &lt; 수입 하이엔드 브랜드. 주방은 비용 절감과 고급화의 차이가 가장 크게 발생하는 항목입니다.</li>
+    </ul>
+
+    <p style="text-align: right; margin-top: 30px;"><a href="#free-estimate" class="cta-button" style="padding: 10px 20px;">자재별 비용 상세 견적 요청</a></p>
+</section>
+
+<section id="process" aria-label="성공적인 아파트 인테리어 절차">
+    <h2>성공적인 아파트 인테리어 절차: 견적 비교부터 사후관리까지</h2>
+    <p>아파트 인테리어를 진행하기 전에 꼼꼼한 준비는 필수입니다. 전문가가 제안하는 2026년 인테리어 진행 절차를 참고하여 체계적인 계획을 수립해보세요.</p>
+    <ol>
+        <li><strong>1단계: 예산 설정 및 컨셉 확정</strong><br>
+            <p>막연하게 '예쁜 집'을 상상하기보다, 정확한 <span class="highlight">인테리어 예상 금액</span>을 정하는 것이 중요합니다. 인테리어 견적은 예산에 맞춰 조정될 수 있으므로, 예산 범위를 명확히 설정해야 합니다. 원하는 디자인 스타일(미니멀리즘, 북유럽, 모던 등)의 포트폴리오를 충분히 수집하여 전문가와의 상담 시 활용하세요.</p>
+        </li>
+        <li><strong>2단계: 인테리어 업체 선정 (견적 비교)</strong><br>
+            <p>최소 3곳 이상의 <span class="highlight">인테리어 업체</span> 견적을 받아보세요. 견적서에는 공사 범위, 자재 목록, 기간 등이 상세히 기재되어 있는지 확인해야 합니다. 단순히 <span class="highlight">저렴한곳</span>을 찾기보다, 포트폴리오와 실제 <span class="highlight">고객 후기</span>를 통해 업체의 전문성을 검증하는 것이 중요합니다.</p>
+        </li>
+        <li><strong>3단계: 현장 실측 및 최종 계약</strong><br>
+            <p>업체 선정 후, 현장 방문 실측을 통해 정확한 견적을 산출합니다. 계약서 작성 시에는 <span class="warning-text">추가 비용 발생 기준, 공사 범위, 하자 보수 기간(최소 1년), 공사 지연 시 배상 기준</span> 등을 명확하게 명시해야 합니다. 계약금은 전체 비용의 10%~30%가 일반적입니다.</p>
+            <p class="warning-text"><strong>(중요) 인테리어 피해 방지 Tip:</strong> <a href="https://www.consumer.go.kr/csmac/biz/cnsl/cnsldcl/CnsltList.do" target="_blank" class="external-link">공정거래위원회 소비자 분쟁해결기준</a>에 따르면, 계약서 내용 확인 및 피해 예방 조치를 취하는 것이 중요합니다.</p>
+        </li>
+        <li><strong>4단계: 공사 진행 및 중간 점검</strong><br>
+            <p>공사 기간 동안 주방 가구, 바닥재, 타일 등 주요 자재가 정확하게 시공되는지 중간 점검을 하는 것이 좋습니다. 특히 철거 후 배관 문제나 방수 문제가 발견되는 경우가 있으므로, 현장 방문을 통해 꼼꼼히 체크해야 합니다.</p>
+        </li>
+        <li><strong>5단계: 잔금 지급 및 하자 보수</strong><br>
+            <p>공사 완료 후, 최종 점검을 통해 계약된 내용대로 시공되었는지 확인합니다. 잔금 지급 후 하자가 발생할 경우, 계약서에 명시된 기간 동안 보수 요청이 가능합니다. 이사 후에도 꼼꼼하게 하자를 점검하는 것이 중요합니다.</p>
+        </li>
+    </ol>
+</section>
+
+<section id="reviews" aria-label="실제 고객 후기 및 사례">
+    <h2>아파트 인테리어 고객 사례 및 내돈내산 후기</h2>
+    <p>실제 아파트 인테리어를 진행한 고객들의 <span class="highlight">내돈내산 후기</span>를 통해 인테리어 비용과 만족도를 확인해보세요. 저렴한 인테리어 <span class="highlight">싼곳</span>을 찾기보다, 합리적인 <span class="highlight">가격</span>에 고품질 시공을 제공하는 업체를 선택하는 것이 중요합니다.</p>
+    <div class="card-container">
+        <div class="info-card">
+            <h4>사례 1: 30평대 아파트 올 수리 후기 (서울 강남구)</h4>
+            <p>“오래된 아파트라 샤시 교체가 필수였고, 주방 확장까지 진행했습니다. 총 <span class="highlight">견적 금액</span>은 4,000만원 정도였지만, 결과적으로 집값이 상승했고 주거 만족도가 매우 높아졌습니다. 처음에는 <span class="highlight">저렴한곳</span>을 찾으려 했지만, 결국 하자 보수가 확실한 업체를 선택한 것이 신의 한 수였습니다.”</p>
+        </div>
+        <div class="info-card">
+            <h4>사례 2: 24평 아파트 부분 인테리어 후기 (부산 해운대구)</h4>
+            <p>“신축 아파트라 전체 수리는 필요 없었고, <span class="highlight">부분 인테리어</span>만 진행했습니다. 바닥재를 강마루로 교체하고, 주방 싱크대 상판만 교체했습니다. 총 <span class="highlight">비용</span>은 800만원으로 만족스러운 <span class="highlight">내돈내산</span> 후기입니다.”</p>
+        </div>
+        <div class="info-card">
+            <h4>사례 3: 40평대 아파트 고급 인테리어 후기 (경기 성남시)</h4>
+            <p>“원목 마루와 수입 타일을 사용하여 <span class="highlight">고급 인테리어</span>를 진행했습니다. 총 <span class="highlight">예상 가격</span>은 6,000만원을 초과했지만, 주방의 대형 아일랜드와 시스템 에어컨 설치로 집이 완전히 바뀌었습니다. 견적 <span class="highlight">비교</span>를 통해 전문 업체와 계약했습니다.”</p>
+        </div>
+    </div>
+</section>
+
+<section id="regional-analysis" aria-label="지역별 인테리어 비용 비교">
+    <h2>전국 지역별 인테리어 비용 비교: 서울, 경기, 부산, 대구 등</h2>
+    <p>아파트 인테리어 비용은 지역별 인건비와 물류비에 따라 차이가 발생합니다. 특히 서울, 경기, 인천 등 수도권 지역과 광역시(부산, 대구, 대전, 광주, 울산)는 인테리어 업체 수가 많아 경쟁이 치열한 반면, 인건비가 높습니다. 상대적으로 <span class="highlight">저렴한곳</span>을 찾을 수 있는 지방 소도시(구미, 창원, 포항 등)도 있습니다.</p>
+    <p>아래는 주요 지역별 인테리어 <span class="highlight">평균 비용</span> 비교표입니다. (30평대 아파트 올 수리, 샤시 제외 기준)</p>
+    <table>
+        <thead>
+            <tr>
+                <th>지역</th>
+                <th>예상 평균 비용 (30평대)</th>
+                <th>특징 및 참고 사항</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>수도권 (서울/경기/인천)</strong></td>
+                <td>2,800만원 ~ 3,800만원</td>
+                <td>인건비 및 물가 최고 수준. 고급 자재 수요 높음. <span class="highlight">서울 인테리어 비용</span>, <span class="highlight">인천 인테리어 가격</span></td>
+            </tr>
+            <tr>
+                <td><strong>영남권 (부산/대구/울산/경남/경북)</strong></td>
+                <td>2,500만원 ~ 3,500만원</td>
+                <td><span class="highlight">부산 인테리어 가격</span>은 수도권 대비 5~10% 저렴. <span class="highlight">대구 인테리어</span>, <span class="highlight">구미 인테리어</span> 등 지역별 업체 경쟁 치열.</td>
+            </tr>
+            <tr>
+                <td><strong>호남권 (광주/전남/전북)</strong></td>
+                <td>2,300만원 ~ 3,300만원</td>
+                <td>인건비가 비교적 안정적. <span class="highlight">광주 인테리어</span>, <span class="highlight">전주 인테리어</span> 등 전문 업체 다수.</td>
+            </tr>
+            <tr>
+                <td><strong>충청권 (대전/세종/충남/충북)</strong></td>
+                <td>2,400만원 ~ 3,400만원</td>
+                <td><span class="highlight">대전 인테리어</span> 시장 활발. <span class="highlight">세종 인테리어</span>는 신축 아파트 위주.</td>
+            </tr>
+            <tr>
+                <td><strong>강원/제주</strong></td>
+                <td>2,600만원 ~ 3,600만원</td>
+                <td>물류비 상승 요인 존재. <span class="highlight">제주 인테리어</span>, <span class="highlight">강릉 인테리어</span> 등 특수 환경 고려 필요.</td>
+            </tr>
+        </tbody>
+    </table>
+    <p><strong>전국 지역명 키워드 삽입 예시:</strong> <span class="highlight">구미</span>, <span class="highlight">포항</span>, <span class="highlight">창원</span>, <span class="highlight">수원</span>, <span class="highlight">용인</span>, <span class="highlight">고양</span>, <span class="highlight">성남</span>, <span class="highlight">청주</span>, <span class="highlight">천안</span>, <span class="highlight">김해</span>, <span class="highlight">양산</span>, <span class="highlight">아산</span>, <span class="highlight">원주</span>, <span class="highlight">춘천</span>, <span class="highlight">순천</span>, <span class="highlight">여수</span>, <span class="highlight">군산</span>, <span class="highlight">익산</span>, <span class="highlight">안동</span>, <span class="highlight">김천</span>, <span class="highlight">경산</span>, <span class="highlight">경주</span>, <span class="highlight">진주</span>, <span class="highlight">통영</span>, <span class="highlight">거제</span>, <span class="highlight">목포</span>, <span class="highlight">순천</span>, <span class="highlight">서산</span>, <span class="highlight">당진</span>, <span class="highlight">제천</span>, <span class="highlight">충주</span>, <span class="highlight">강릉</span>, <span class="highlight">속초</span>. 인테리어 비용은 지역별 <span class="highlight">평균</span>, <span class="highlight">예상</span> <span class="highlight">금액</span>, <span class="highlight">가격</span>, <span class="highlight">견적</span> <span class="highlight">비교</span>를 통해 합리적인 <span class="highlight">순위</span>를 결정해야 합니다.</p>
+</section>
+
+<section id="free-estimate" aria-label="무료 견적 신청 및 맞춤 상담">
+    <h2>아파트 인테리어 무료 견적 신청하기</h2>
+    <p>아래 폼을 작성해주시면 전국 인테리어 전문가가 맞춤형 <span class="highlight">인테리어 견적</span>을 무료로 제공합니다. 정확한 견적 산출을 위해 공사 희망 지역, 평수, 공사 범위를 최대한 상세히 알려주세요. </p>
+
+    <form action="/submit-estimate" method="POST" aria-describedby="견적폼설명">
+        <div class="card-container" style="gap: 10px; margin-bottom: 20px;">
+            <div style="grid-column: span 1;">
+                <label for="apartment_size">아파트 평수</label>
+                <select id="apartment_size" name="apartment_size" required>
+                    <option value="">평수 선택</option>
+                    <option value="10-20">20평대 이하</option>
+                    <option value="30">30평대</option>
+                    <option value="40">40평대</option>
+                    <option value="50+">50평 이상</option>
+                </select>
+            </div>
+            <div style="grid-column: span 1;">
+                <label for="construction_area">공사 희망 지역</label>
+                <select id="construction_area" name="construction_area" required>
+                    <option value="">지역 선택</option>
+                    <option value="서울">서울</option>
+                    <option value="경기">경기</option>
+                    <option value="인천">인천</option>
+                    <option value="부산">부산</option>
+                    <option value="대구">대구</option>
+                    <option value="광주">광주</option>
+                    <option value="대전">대전</option>
+                    <option value="울산">울산</option>
+                    <option value="세종">세종</option>
+                    <option value="강원">강원</option>
+                    <option value="충북">충북</option>
+                    <option value="충남">충남</option>
+                    <option value="전북">전북</option>
+                    <option value="전남">전남</option>
+                    <option value="경북">경북</option>
+                    <option value="경남">경남</option>
+                    <option value="제주">제주</option>
+                </select>
+            </div>
+        </div>
+
+        <label for="construction_type">공사 범위 (인테리어 유형)</label>
+        <select id="construction_type" name="construction_type" required>
+            <option value="">선택하세요</option>
+            <option value="올수리">전체 올 수리 (샤시 포함)</option>
+            <option value="부분수리">부분 인테리어 (도배, 바닥 등)</option>
+            <option value="단순리폼">단순 리폼 (필름, 페인트)</option>
+        </select>
+
+        <label for="apartment_age">아파트 건축 연도</label>
+        <select id="apartment_age" name="apartment_age" required>
+            <option value="">선택하세요</option>
+            <option value="신축(5년이내)">신축 (5년 이내)</option>
+            <option value="구축(10년이내)">구축 (10년 이내)</option>
+            <option value="노후(15년이상)">노후 (15년 이상)</option>
+        </select>
+
+        <label for="budget_range">희망 예산 범위</label>
+        <input type="text" id="budget_range" name="budget_range" placeholder="예: 2,000만원 ~ 3,000만원" required />
+
+        <label for="start_date">공사 희망 시작일</label>
+        <input type="date" id="start_date" name="start_date" required />
+
+        <label for="contact_phone">연락처</label>
+        <input type="tel" id="contact_phone" name="contact_phone" placeholder="010-1234-5678" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" required />
+
+        <button type="submit" class="cta-button">무료 견적 요청하기</button>
+    </form>
+</section>
+
+<section id="faq" aria-label="자주 묻는 질문 FAQ">
+    <h2>자주 묻는 질문 (FAQ)</h2>
+    <dl class="faq">
+        <dt>Q. 아파트 인테리어 비용은 어떻게 산출되나요?</dt>
+        <dd>A. 인테리어 비용은 <span class="highlight">평당 가격</span>으로 산출되기도 하지만, 정확한 <span class="highlight">견적</span>은 공사 범위(올 수리 vs 부분 수리), 자재 등급(고가/중가/저가), 인건비, 철거 비용에 따라 달라집니다. 특히 샤시 교체 여부와 주방/욕실 공사 범위가 전체 <span class="highlight">비용</span>의 큰 부분을 차지합니다. 여러 업체에서 <span class="highlight">견적 비교</span>를 통해 합리적인 <span class="highlight">가격</span>을 찾는 것이 중요합니다.</dd>
+
+        <dt>Q. 인테리어 업체 선정 시 반드시 확인해야 할 사항은 무엇인가요?</dt>
+        <dd>A. 첫째, 사업자등록증과 인테리어 면허(1,500만원 이상 공사 시 건설업 면허)가 있는지 확인하세요. 둘째, 계약서에 <span class="warning-text">추가 비용 발생 조건</span>과 <span class="warning-text">하자 보수 기간</span>이 명시되어 있는지 꼼꼼하게 확인하세요. 셋째, <span class="highlight">내돈내산 후기</span>나 포트폴리오를 통해 해당 업체의 시공 품질과 디자인 능력을 확인해야 합니다. <a href="https://namu.wiki/w/%EC%9D%B8%ED%85%8C%EB%A6%AC%EC%96%B4" target="_blank" class="external-link">나무위키 인테리어 항목</a>에서 인테리어 사기 예방 팁을 참고할 수 있습니다.</dd>
+
+        <dt>Q. 인테리어 공사 기간은 얼마나 걸리나요?</dt>
+        <dd>A. 20평대 올 수리 기준 평균 2주~3주, 30평대 올 수리 기준 평균 3주~4주가 소요됩니다. 40평 이상 대형 평형이나 주방 구조 변경, 베란다 확장 등 대규모 공사가 포함될 경우 4주 이상이 소요될 수 있습니다. 공사 중 자재 수급 문제나 예상치 못한 변수(철거 후 배관 문제 등)로 기간이 연장될 수 있습니다.</dd>
+
+        <dt>Q. 셀프 인테리어와 전문가 인테리어의 장단점 차이점은 무엇인가요?</dt>
+        <dd>A. <span class="highlight">셀프 인테리어</span>는 전문가에게 맡기는 것보다 <span class="highlight">비용</span>을 30~50% 절감할 수 있다는 <span class="highlight">장점</span>이 있습니다. 하지만 모든 공정을 직접 관리해야 하므로 시간이 많이 들고, 전문성이 부족하면 시공 품질이 떨어질 수 있다는 <span class="highlight">단점</span>이 있습니다. <span class="highlight">전문가 인테리어</span>는 <span class="highlight">가격</span>이 높지만, 완성도 높은 결과물과 사후 A/S 보장을 받을 수 있는 <span class="highlight">장점</span>이 있습니다.</dd>
+        
+        <dt>Q. 2026년 인테리어 트렌드와 비용에 미치는 영향은 무엇인가요?</dt>
+        <dd>A. 2026년에는 '친환경', '스마트 홈', '고급화'가 주요 트렌드입니다. 친환경 자재(포름알데히드 저감 벽지, 친환경 페인트) 수요 증가로 <span class="highlight">비용</span>이 다소 상승할 수 있습니다. <a href="https://www.lh.or.kr/" target="_blank" class="external-link">한국토지주택공사(LH)</a> 자료에 따르면 주거 환경 개선에 대한 관심이 높아지고 있습니다. 또한, 시스템 에어컨, 스마트 조명 등 IOT 기기 도입이 활발해지면서 <span class="highlight">인테리어 견적</span>에 관련 항목이 포함되는 경우가 증가하고 있습니다.</dd>
+
+    </dl>
+</section>
+
+<section id="contact-info" aria-label="문의하기">
+    <h2>인테리어 상담 문의하기</h2>
+    <p>아파트 인테리어 <span class="highlight">비용</span>에 대한 궁금증은 언제든지 문의해주세요. 저희는 <span class="highlight">전국 인테리어 업체 순위</span>를 분석하고 합리적인 <span class="highlight">가격</span>을 제공하는 협력사를 추천해 드립니다.</p>
+    <p><strong>전화 상담:</strong> 1661-XXXX</p>
+    <p><strong>이메일 문의:</strong> info@yourdomain.kr</p>
+    <p><strong>운영 시간:</strong> 월~토 09:00~18:00 (일요일 및 공휴일 휴무)</p>
+    <p><strong>위치 정보:</strong> 전국 주요 인테리어 업체 네트워크 보유</p>
+</section>
+
+  
